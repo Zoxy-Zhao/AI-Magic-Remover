@@ -1,0 +1,5 @@
+# AI Magic Remover - Python Dependencies
+opencv-python>=4.8.0
+numpy>=1.24.0
+onnxruntime>=1.16.0        # CPU 推理; GPU 版请安装 onnxruntime-gpu
+gradio>=3.40.0,<4.0.0      # Web UI (本项目基于 Gradio 3.x API)

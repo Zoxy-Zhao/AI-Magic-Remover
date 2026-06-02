@@ -1,0 +1,59 @@
+# ========== 模型权重 ==========
+*.onnx
+*.pt
+*.pth
+*.bin
+
+# ========== 测试图片 & 媒体 ==========
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.mp4
+# 保留 assets/ 目录下的展示图片
+!assets/*.png
+!assets/*.jpg
+!assets/*.gif
+
+# ========== Python ==========
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.spec
+
+# 保留 packaging/ 下的 spec 文件
+!packaging/*.spec
+
+# ========== 虚拟环境 ==========
+venv/
+.venv/
+env/
+
+# ========== IDE ==========
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ========== OS ==========
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ========== PyInstaller 构建产物 ==========
+*.exe
+
+# ========== 临时文件 & 缓存 ==========
+.ruff_cache/
+库测试.py
+
+# ========== 文档 (体积较大，不纳入 git) ==========
+*.doc
+*.docx
+*.pdf
+# 如需在 GitHub 展示报告，可以将 PDF 放到 docs/ 并取消下面的注释
+# !docs/*.pdf
