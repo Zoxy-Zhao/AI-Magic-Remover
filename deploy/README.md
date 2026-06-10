@@ -30,7 +30,7 @@ lama_fp32.onnx            ← 从本地复制 (208 MB, 需要 Git LFS)
 
 ```bash
 # 克隆 Space 仓库
-git clone https://huggingface.co/spaces/zxy2016567076/AI-Magic-Remover
+git clone https://huggingface.co/spaces/Zayn-ai/AI-Magic-Remover
 cd AI-Magic-Remover
 
 # 安装 Git LFS (lama 模型超过 100MB)
@@ -54,7 +54,7 @@ git push
 构建成功后你会得到一个在线链接，例如：
 
 ```
-https://huggingface.co/spaces/zxy2016567076/AI-Magic-Remover
+https://huggingface.co/spaces/Zayn-ai/AI-Magic-Remover
 ```
 
 将这个链接添加到项目主 README.md 中即可。

@@ -142,7 +142,7 @@ AI-Magic-Remover/
 
 ```bash
 # 克隆仓库
-git clone https://github.com/zxy2016567076/AI-Magic-Remover.git
+git clone https://github.com/Zoxy-Zhao/AI-Magic-Remover.git
 cd AI-Magic-Remover
 
 # 安装依赖
