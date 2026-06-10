@@ -1,5 +1,4 @@
 import torch
-import numpy as np
 from mobile_sam import sam_model_registry
 from mobile_sam.utils.onnx import SamOnnxModel
 import warnings
@@ -8,10 +7,11 @@ import warnings
 warnings.filterwarnings("ignore")
 
 # ================= 配置区域 =================
-CHECKPOINT_PATH = "D:\VS_code\SAM\mobile_sam.pt"
+CHECKPOINT_PATH = "mobile_sam.pt"  # 改成你本地的 MobileSAM 权重路径
 MODEL_TYPE = "vit_t"  # Tiny ViT 模型
 OUTPUT_ONNX_PATH = "mobile_sam_decoder.onnx"
 # ===========================================
+
 
 def export_onnx():
     print("1. 正在加载 MobileSAM 模型...")
@@ -34,8 +34,12 @@ def export_onnx():
     # image_embedding_size = mobile_sam.image_encoder.img_size // mobile_sam.image_encoder.patch_embed.patch_size
     image_embedding_size = 64  # 直接改为 64，因为 1024 / 16 = 64
     dummy_inputs = {
-        "image_embeddings": torch.randn(1, embed_dim, image_embedding_size, image_embedding_size, dtype=torch.float),
-        "point_coords": torch.randint(low=0, high=1024, size=(1, 5, 2), dtype=torch.float),
+        "image_embeddings": torch.randn(
+            1, embed_dim, image_embedding_size, image_embedding_size, dtype=torch.float
+        ),
+        "point_coords": torch.randint(
+            low=0, high=1024, size=(1, 5, 2), dtype=torch.float
+        ),
         "point_labels": torch.randint(low=0, high=4, size=(1, 5), dtype=torch.float),
         "mask_input": torch.randn(1, 1, 256, 256, dtype=torch.float),
         "has_mask_input": torch.tensor([1], dtype=torch.float),
@@ -51,19 +55,20 @@ def export_onnx():
         onnx_model,
         _tuple_inputs,
         OUTPUT_ONNX_PATH,
-        export_params=True,      # 导出权重
-        opset_version=11,        # ONNX 算子版本，11 兼容性最好
-        do_constant_folding=True,# 常量折叠优化（把能预计算的先算好）
-        input_names=list(dummy_inputs.keys()), # 输入节点名称
-        output_names=["masks", "iou_predictions", "low_res_masks"], # 输出节点名称
-        dynamic_axes={           # 【面试考点】动态轴：允许输入不同数量的点
+        export_params=True,  # 导出权重
+        opset_version=11,  # ONNX 算子版本，11 兼容性最好
+        do_constant_folding=True,  # 常量折叠优化（把能预计算的先算好）
+        input_names=list(dummy_inputs.keys()),  # 输入节点名称
+        output_names=["masks", "iou_predictions", "low_res_masks"],  # 输出节点名称
+        dynamic_axes={  # 【面试考点】动态轴：允许输入不同数量的点
             "point_coords": {1: "num_points"},
             "point_labels": {1: "num_points"},
-        }
+        },
     )
-    
+
     print(f"✅ 成功！模型已保存为: {OUTPUT_ONNX_PATH}")
     print("现在你拥有了一个工业级的推理模型文件。")
+
 
 if __name__ == "__main__":
     export_onnx()
